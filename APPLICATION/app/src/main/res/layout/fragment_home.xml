@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mobile_with_google_maps"
+    android:gravity="clip_horizontal">
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/backgroung"
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="add"
+        android:text="Ricerca \n Supermercato" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/backgroung"
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="add"
+        android:foregroundGravity="fill_horizontal|center"
+        android:text="Ricerca \nProdotto"
+        app:iconGravity="textEnd"></Button>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/backgroung"
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="add"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="Registrazione \n beacon"
+        app:iconGravity="end"></Button>
+
+</RelativeLayout>

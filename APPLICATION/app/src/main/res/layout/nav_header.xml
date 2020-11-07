@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:layout_marginTop="-10dp"
+    android:background="@drawable/backgroung"
+    android:gravity="bottom|center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:paddingStart="10dp"
+    android:paddingLeft="100dp"
+    android:paddingTop="100dp"
+    android:paddingBottom="10dp"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="88dp"
+        android:backgroundTint="@color/white"
+        android:elevation="100dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_launcher_foreground"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="false"
+        android:text="info@safermarket.com"
+        android:textAlignment="center"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp"
+        android:text="SAFER MARKET"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+
+</LinearLayout>

@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">LoginDataBase</string>
+    <string name="app_name">SAFERMARKET</string>
+    <string name="impostazioni">Impostazioni</string>
+    <string name="assistenza">Assistenza</string>
+    <string name="profilo">Profilo</string>
+    <string name="navigation_drawer_open">open navigation drawer</string>
+    <string name="navigation_drawer_close">close navigation drawer</string>
+    <string name="login">LOGIN</string>
 </resources>

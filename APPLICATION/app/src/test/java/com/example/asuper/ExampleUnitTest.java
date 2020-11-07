@@ -1,4 +1,4 @@
-package com.example.logindatabase;
+package com.example.asuper;
 
 import org.junit.Test;
 
