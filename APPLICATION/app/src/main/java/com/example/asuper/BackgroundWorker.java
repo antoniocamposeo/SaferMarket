@@ -2,6 +2,7 @@ package com.example.asuper;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
     private String tipo;
     private AlertDialog alertDialog;
     public String result;
+
     BackgroundWorker(Context ctx){
         context = ctx;
         result = "";
@@ -41,7 +43,7 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
         String server_url = "http://192.168.1.57/connessioneadb/server.php";
         String post_data = "";
         try {
-
+            System.out.println("Executing first: "+ result);
             URL url = new URL(server_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -115,11 +117,11 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
             while((line = bufferedReader.readLine())!=null){
                 result = result + line;
             }
-            System.out.println(result);
+            this.result = result;
             bufferedReader.close();
             inputStream.close();
             httpURLConnection.disconnect();
-            this.result = result;
+            System.out.println("Received: "+result);
             return result;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -139,13 +141,15 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        /*if(result!=null) {
+        System.out.println("HO RICEVUTO: "+result);
+        if(result!=null) {
             System.out.println(result);
             switch (tipo) {
                 case "login": {
                     if (result.equals("1")) {
                         Toast.makeText(this.context, "Benvenuto", Toast.LENGTH_LONG).show();
-                        //TODO: switch context
+                        Intent i = new Intent(context, signup.class);
+                        context.startActivity(i);
                     } else {
                         alertDialog.setMessage("Utente non registrato!");
                         alertDialog.show();
@@ -206,7 +210,7 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                     break;
                 }
             }
-        }*/
+        }
     }
 
     @Override
@@ -215,4 +219,10 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
         //setProgressValue(0);
     }
 
+    public String getResult(){
+        return this.result;
+    }
+
 }
+
+
