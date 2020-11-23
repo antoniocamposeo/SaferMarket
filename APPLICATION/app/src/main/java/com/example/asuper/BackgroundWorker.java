@@ -37,10 +37,11 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
         context = ctx;
         result = "";
     }
+
     @Override
     protected String doInBackground(String[] params) {
         tipo = params[0];
-        String server_url = "http://192.168.1.57/connessioneadb/server.php";
+        String server_url = "http://192.168.1.59/connessioneadb/server.php";
         String post_data = "";
         try {
             System.out.println("Executing first: "+ result);
@@ -141,14 +142,13 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        System.out.println("HO RICEVUTO: "+result);
         if(result!=null) {
             System.out.println(result);
             switch (tipo) {
                 case "login": {
                     if (result.equals("1")) {
                         Toast.makeText(this.context, "Benvenuto", Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(context, signup.class);
+                        Intent i = new Intent(context, HomeFragment.class);
                         context.startActivity(i);
                     } else {
                         alertDialog.setMessage("Utente non registrato!");
@@ -159,9 +159,11 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                 case "resgistrazione": {
                     if (result.equals("1")) {
                         Toast.makeText(this.context, "Registrazione avvenuta con successo!\nFai il LOGIN", Toast.LENGTH_LONG).show();
-                        //TODO: Jump to Login page
+                        Intent i = new Intent(context, login.class);
                     } else {
                         Toast.makeText(this.context, "Errore durante la registrazione!", Toast.LENGTH_LONG).show();
+                        signup.email.setText("");
+                        signup.password.setText("");
                     }
                     break;
                 }

@@ -20,7 +20,6 @@ public class login extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private TextView registrazione;
-    private Result res;
     private BackgroundWorker backgroundWorker;
     public boolean set;
 
@@ -32,7 +31,6 @@ public class login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         registrazione = (TextView) findViewById(R.id.registrazione);
         Button b = findViewById(R.id.login);
-        res = new Result();
         backgroundWorker = new BackgroundWorker(this);
     }
 

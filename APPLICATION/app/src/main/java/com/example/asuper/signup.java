@@ -10,11 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class signup extends AppCompatActivity {
-    private EditText nome;
-    private EditText cognome;
-    private EditText email;
-    private EditText password;
-    private EditText indirizzo;
+    private static EditText nome;
+    private static EditText cognome;
+    public static EditText email;
+    public static EditText password;
+    private static EditText indirizzo;
     private Button reg;
 
     @Override
@@ -43,7 +43,7 @@ public class signup extends AppCompatActivity {
                         if(!i.equals("")) {
                             String result = "";
                             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-                            backgroundWorker.execute(new String[]{"registrazione", n, c, e, p, i});
+                            backgroundWorker.execute("registrazione", n, c, e, p, i);
                         } else Toast.makeText(this, "Inserire indirizzo!", Toast.LENGTH_LONG).show();
                     } else Toast.makeText(this, "Inserire password!", Toast.LENGTH_LONG).show();
                 } else Toast.makeText(this, "Inserire email!", Toast.LENGTH_LONG).show();
