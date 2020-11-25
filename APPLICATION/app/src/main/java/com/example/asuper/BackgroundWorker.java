@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class BackgroundWorker extends AsyncTask <String, Void, String> {
@@ -39,12 +40,11 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String[] params) {
+    protected String doInBackground(String... params) {
         tipo = params[0];
         String server_url = "http://192.168.1.59/connessioneadb/server.php";
         String post_data = "";
         try {
-            System.out.println("Executing first: "+ result);
             URL url = new URL(server_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -160,6 +160,7 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                     if (result.equals("1")) {
                         Toast.makeText(this.context, "Registrazione avvenuta con successo!\nFai il LOGIN", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(context, login.class);
+                        this.context.startActivity(i);
                     } else {
                         Toast.makeText(this.context, "Errore durante la registrazione!", Toast.LENGTH_LONG).show();
                         signup.email.setText("");
@@ -181,12 +182,12 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                         civico = s.nextToken();
                         cap = s.nextToken();
                         numpersone = Integer.valueOf(s.nextToken());
-                        System.out.println("Utente: " + nome + " " + via + " " + civico + " " + cap + " " + numpersone);
                     }
                     break;
                 }
                 case "supermercati": {
                     System.out.println(result);
+                    ArrayList<Supermarket> sup = new ArrayList<Supermarket>();
                     StringTokenizer st = new StringTokenizer(result, ";");
                     String id, nome, via, civico, cap;
                     int numpersone;
@@ -199,8 +200,13 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                         civico = s.nextToken();
                         cap = s.nextToken();
                         numpersone = Integer.valueOf(s.nextToken());
-                        System.out.println("Utente: " + nome + " " + via + " " + civico + " " + cap + " " + numpersone);
+                        Beacon beacon_i = new Beacon(s.nextToken(), "ingresso");
+                        Beacon beacon_u = new Beacon(s.nextToken(),"uscita");
+                        sup.add(new Supermarket(id, nome, via, civico, cap, numpersone, beacon_i, beacon_u));
                     }
+                    Ricerca_Supermercato.supermarkets = sup;
+                    Intent i = new Intent(this.context, Ricerca_Prodotto.class);
+                    this.context.startActivity(i);
                     break;
                 }
                 case "entra": {

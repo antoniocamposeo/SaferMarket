@@ -24,10 +24,12 @@ public class HomeFragment extends Fragment {
     }
 
     public void onRicercaSupClicked(){
-        //TODO: Intent i = new Intent(this.getContext(), )
+        BackgroundWorker b = new BackgroundWorker(this.getContext());
+        b.doInBackground("supermercati");
     }
 
     public void onRicercaProdClicked(){
-        //TODO: Intent i = new Intent(this.getContext(), )
+        Intent i = new Intent(this.getContext(), Ricerca_Prodotto.class);
+        startActivity(i);
     }
 }
