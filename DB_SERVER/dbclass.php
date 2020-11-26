@@ -11,7 +11,6 @@ class DB_functions{
 		$mysql_qry = "INSERT INTO utenti VALUES('$nome','$cognome','$email','$encrypted_password','$indirizzo')";
 		
 		$result = mysqli_query($conn, $mysql_qry);
-		//result è 1 se la query è andata a buon fine, altrimenti è null
 		if($result == 1){
 			return $result;
 		}
@@ -21,7 +20,6 @@ class DB_functions{
 	}
 	
 	public function login($email, $password, $conn){
-		//$encrypted_password = sha1($password);
 		$encrypted_password = $password;
 		$mysql_qry = "select * from utenti where email = '$email' and password = '$encrypted_password'";
 		$result = mysqli_query($conn, $mysql_qry);
@@ -46,7 +44,7 @@ class DB_functions{
 	}
 	
 	public function getSuperMarket($conn){
-		$mysql_qry = "select id, nome, via, civico, cap, numpersone from supermarket order by numpersone asc";
+		$mysql_qry = "select id, nome, via, civico, cap, numpersone, cod_beacon_ing, cod_beacon_usc from supermarket order by numpersone asc";
 		$result = mysqli_query($conn, $mysql_qry);
 		if(mysqli_num_rows($result) > 0){ 
 		$string = "";
@@ -62,7 +60,23 @@ class DB_functions{
 			$beacon_ex = $resrow[7];
 			$string = $string.$id."/".$nome."/".$via."/".$civico."/".$cap."/".$numpersone."/".$beacon_ing."/".$beacon_ex.";";
 		}
-			return $result;
+			return $string;
+		}
+		else{
+			return "Error!";
+		}
+	}
+	
+	public function getProdotti($conn){
+		$mysql_qry = "select distinct nome from prodotto order by nome";
+		$result = mysqli_query($conn, $mysql_qry);
+		if(mysqli_num_rows($result) > 0){ 
+		$string = "";
+		for ($x = 0; $x < mysqli_num_rows($result); $x++){
+			$resrow = mysqli_fetch_row($result);
+			$string = $string.$nome.";";
+		}
+			return $string;
 		}
 		else{
 			return "Error!";

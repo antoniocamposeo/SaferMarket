@@ -5,7 +5,7 @@ public class Supermarket {
     //dichiarazione stringhe
     private String id;
     private String nome;
-    private String numpersone;
+    private int numpersone;
     private String civico;
     private String cap;
     private String via;
@@ -13,7 +13,7 @@ public class Supermarket {
     private Beacon codbeacon_uscita;
 
     //crea oggetto
-    public Supermarket(String id, String nome, String numpersone, String civico, String cap, String via, Beacon codBeacon_ingresso, Beacon codBeacon_uscita) {
+    public Supermarket(String id, String nome,String via, String civico, String cap, int numpersone, Beacon codBeacon_ingresso, Beacon codBeacon_uscita) {
         this.id=id;
         this.nome=nome;
         this.numpersone=numpersone;
@@ -40,10 +40,10 @@ public class Supermarket {
         return nome;
     }
 
-    public void setNumpersone(String numpersone) {
+    public void setNumpersone(int numpersone) {
         this.numpersone= numpersone;
     }
-    public String getNumpersone() {
+    public int getNumpersone() {
         return numpersone;
     }
 

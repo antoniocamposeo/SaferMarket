@@ -47,5 +47,10 @@ switch($service){
 		$res = $db->esci($beacon_code, $conn);
 		break;
 	}
+	case "prodotto":{
+		$res = $db->getProdotti($conn);
+		print($res);
+		break;
+	}
 }	
 ?>

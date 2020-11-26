@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class BackgroundWorker extends AsyncTask <String, Void, String> {
@@ -79,6 +80,10 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                     String nome_prodotto = params[1];
                     post_data = URLEncoder.encode("service","UTF-8")+"="+URLEncoder.encode("prodotti","UTF-8")+"&"
                             + URLEncoder.encode("prodotto","UTF-8")+"="+URLEncoder.encode(nome_prodotto,"UTF-8");
+                    break;
+                }
+                case "prodotto":{
+                    post_data = URLEncoder.encode("service","UTF-8")+"="+URLEncoder.encode("prodotto","UTF-8");
                     break;
                 }
                 case "supermercati":{
@@ -160,6 +165,7 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                     if (result.equals("1")) {
                         Toast.makeText(this.context, "Registrazione avvenuta con successo!\nFai il LOGIN", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(context, login.class);
+                        context.startActivity(i);
                     } else {
                         Toast.makeText(this.context, "Errore durante la registrazione!", Toast.LENGTH_LONG).show();
                         signup.email.setText("");
@@ -185,22 +191,44 @@ public class BackgroundWorker extends AsyncTask <String, Void, String> {
                     }
                     break;
                 }
+                case "prodotto": {
+                    System.out.println(result);
+                    ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
+                    StringTokenizer st = new StringTokenizer(result, ";");
+                    String nome;
+                    while (st.hasMoreTokens()) {
+                        nome = st.nextToken();
+                        prodotti.add(new Prodotto("","",nome));
+                    }
+                    //TODO: set prodotti as a class member and launch Ricerca_Prodotto activity
+                    Ricerca_Prodotto.prodotti = prodotti;
+                    Intent i = new Intent (this.context, Ricerca_Prodotto.class);
+                    this.context.startActivity(i);
+                    break;
+                }
                 case "supermercati": {
                     System.out.println(result);
                     StringTokenizer st = new StringTokenizer(result, ";");
                     String id, nome, via, civico, cap;
+                    ArrayList<Supermarket> sup = new ArrayList<Supermarket>();
                     int numpersone;
                     while (st.hasMoreTokens()) {
-                        String utente = st.nextToken();
-                        StringTokenizer s = new StringTokenizer(utente, "/");
+                        String supermarket = st.nextToken();
+                        StringTokenizer s = new StringTokenizer(supermarket, "/");
                         id = s.nextToken();
                         nome = s.nextToken();
                         via = s.nextToken();
                         civico = s.nextToken();
                         cap = s.nextToken();
                         numpersone = Integer.valueOf(s.nextToken());
-                        System.out.println("Utente: " + nome + " " + via + " " + civico + " " + cap + " " + numpersone);
+                        Beacon beacon_ing = new Beacon(s.nextToken(), "ingresso");
+                        Beacon beacon_ex = new Beacon(s.nextToken(), "uscita");
+                        sup.add(new Supermarket(id,nome,via,civico,cap,numpersone,beacon_ing,beacon_ex));
                     }
+                    //TODO: launch activity ricerca supermercato
+                    Ricerca_Supermercato.supermarkets = sup;
+                    Intent i = new Intent(this.context, Ricerca_Supermercato.class);
+                    this.context.startActivity(i);
                     break;
                 }
                 case "entra": {
