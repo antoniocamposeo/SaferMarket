@@ -58,7 +58,9 @@ class DB_functions{
 			$civico = $resrow[3];
 			$cap = $resrow[4];
 			$numpersone = $resrow[5];
-			$string = $string.$id."/".$nome."/".$via."/".$civico."/".$cap."/".$numpersone.";";
+			$beacon_ing = $resrow[6];
+			$beacon_ex = $resrow[7];
+			$string = $string.$id."/".$nome."/".$via."/".$civico."/".$cap."/".$numpersone."/".$beacon_ing."/".$beacon_ex.";";
 		}
 			return $result;
 		}
@@ -80,7 +82,9 @@ class DB_functions{
 			$civico = $resrow[3];
 			$cap = $resrow[4];
 			$numpersone = $resrow[5];
-			$string = $string.$id."/".$nome."/".$via."/".$civico."/".$cap."/".$numpersone.";";
+			$beacon_ing = $resrow[6];
+			$beacon_ex = $resrow[7];
+			$string = $string.$id."/".$nome."/".$via."/".$civico."/".$cap."/".$numpersone."/".$beacon_ing."/".$beacon_ex.";";
 		}
 			return $result;
 		}
